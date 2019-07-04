@@ -8,6 +8,7 @@ Currently, the only way to define the configuration of your Laravel app during D
 
 This behaviour can be problematic, as a lot of developers need to change the configuration in specific tests to see if the application reacts accordingly. 
 
+
 As mentionned [here](https://github.com/laravel/dusk/issues/599), there is no easy way to tackle this problem. 
 
 ## The solution
