@@ -1,0 +1,34 @@
+{
+    "name": "manyapp/duskapiconf",
+    "description": "Change your Laravel configuration for each Dusk test with an easy API",
+    "type": "library",
+    "license": "mit",
+    "authors": [
+        {
+            "name": "manyapp",
+            "email": "admin@many.app"
+        }
+    ],
+    "autoload": {
+            "psr-4": {
+                "Manyapp\\DuskApiConf\\": "src/"
+            }
+        },
+    "require": {
+        
+    },
+    "require-dev": {
+        
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Manyapp\\DuskApiConf\\DuskApiConfServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    }
+}
