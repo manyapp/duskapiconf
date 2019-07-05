@@ -21,6 +21,10 @@ class DuskApiConfServiceProvider extends ServiceProvider
             'manyapp.duskapiconf'
         );
 
+        $this->publishes([
+            __DIR__.'/../config/config.php' => config_path('duskapiconf.php'),
+        ]);
+
         $router = $this->app['router'];
         $router->pushMiddlewareToGroup('web', \Manyapp\DuskApiConf\Middleware\ConfigStoreMiddleware::class);
     }

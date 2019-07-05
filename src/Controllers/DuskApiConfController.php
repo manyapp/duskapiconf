@@ -30,9 +30,7 @@ class DuskApiConfController
         $request = request();
 
         if ( (! $request->filled('key')) || (! $request->filled('value')) ) {
-
             return view('duskapiconf::data', ['value' => 'error_not_all_parameters']);
-
         } else {
 
             $value = json_decode(base64_decode($request->input('value')), true);
