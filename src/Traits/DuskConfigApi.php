@@ -20,7 +20,7 @@ trait DuskConfigApi
         $encoded = base64_encode(json_encode($value));
         $query = "?key=".$key.'&value='.$encoded;
         $this->browse(function ($browser) use ($query) {
-            $data = $browser->visit('/duskapiconf/set'.$query)->element('.content')->getAttribute('innerHTML');
+            $data = $browser->visit('/duskapiconf/set'.$query)->element('.content')->getText();
             $data = trim($data);
             if ($data !== 'ok') {
                 $this->assertTrue(false);
@@ -40,7 +40,7 @@ trait DuskConfigApi
         $query = "?key=".$key;
         $result = null;
         $this->browse(function ($browser) use ($query, &$result) {
-            $data = $browser->visit('/duskapiconf/get'.$query)->element('.content')->getAttribute('innerHTML');
+            $data = $browser->visit('/duskapiconf/get'.$query)->element('.content')->getText();
             $result = json_decode(base64_decode($data), true);
         });
 
