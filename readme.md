@@ -24,59 +24,26 @@ Install the module with:
 composer require manyapp/duskapiconf --dev
 ```
 
-Then, you will have to modify your `DustTestCase.php` to add three methods. Alternatively, you can add the following methods to the Trait of your choice and use the Trait in your Dusk tests.
-
+For Laravel versions prior to 5.5 register the service. 
 ```
-/**
-* Set live config option
-*
-* @param string $key 
-* @param mixed $value
-* @return void
-*/
-public function setConfig($key, $value)
+if ($this->app->environment() !== 'production') {            
+    $this->app->register(Manyapp\DuskApiConf\Controllers\DuskApiConfServiceProvider::class);
+} 
+```
+
+Then, you will have to modify your Dusk Tests to add the Trait.
+
+Example
+```
+<?php
+
+namespace Tests\Browser;
+
+use Manyapp\DuskApiConf\Traits\DuskConfigApi;
+
+class YourDuskTest extends DuskTestCase
 {
-    $encoded = base64_encode(json_encode($value));
-    $query = "?key=".$key.'&value='.$encoded;
-    $this->browse(function($browser) use ($query) {
-        $data = $browser->visit('/duskapiconf/set'.$query)->element('.content')->getAttribute('innerHTML');
-        $data = trim($data);
-        if ($data !== 'ok') {
-            $this->assertTrue(false);
-        }
-    });
-}
-
-
-/**
-* Get a current configuration item
-*
-* @param string $key
-* @return mixed
-*/
-public function getConfig($key)
-{
-    $query = "?key=".$key;
-    $result = null;
-    $this->browse(function($browser) use ($query, &$result) {
-        $data = $browser->visit('/duskapiconf/get'.$query)->element('.content')->getAttribute('innerHTML');
-        $result = json_decode(base64_decode($data), true);
-    });
-    return $result;
-}
-
-/**
-* Reset the configuration to its initial status
-*
-* @return void
-*/
-public function resetConfig()
-{
-    $this->browse(function($browser) {
-        $browser->visit('/duskapiconf/reset');
-    });
-}
-
+    use DuskConfigApi;
 ```
 
 ## Usage

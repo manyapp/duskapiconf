@@ -15,10 +15,13 @@
             }
         },
     "require": {
-        
+        "php": ">=7.0.0",
+        "illuminate/http": ">=v5.4.0",
+        "illuminate/view": ">=v5.4.0",
+        "ext-json": "*"
     },
     "require-dev": {
-        
+
     },
     "minimum-stability": "dev",
     "extra": {

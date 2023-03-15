@@ -13,7 +13,7 @@ class DuskApiConfController
     public function get()
     {
         $request = request();
-        if (! $request->filled('key')) {
+        if (! $request->get('key',false)) {
             return view('duskapiconf::data', ['value' => 'error_not_all_parameters']);
         }
         $value = config($request->input('key'));
@@ -29,7 +29,7 @@ class DuskApiConfController
     {
         $request = request();
 
-        if ( (! $request->filled('key')) || (! $request->filled('value')) ) {
+        if ((!$request->get('key', false)) || (!$request->get('value', false))) {
             return view('duskapiconf::data', ['value' => 'error_not_all_parameters']);
         } else {
 
